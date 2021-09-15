@@ -1,30 +1,30 @@
 import React, { Component } from "react";
 
-// const url = "http://localhost:3000";
-
 class SongList extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { song: [] };
+    this.state = { song: {} };
+    this.getRandomSong = this.getRandomSong.bind(this);
   }
 
   componentDidMount() {
-    this.SongList();
+    this.getRandomSong();
   }
 
-  SongList() {
+  getRandomSong() {
     fetch("http://localhost:3000/songs/random")
       .then((response) => response.json())
-      .then((data) => console.log("Ranking #", data["Position"], data["Title"], "by", data["Artist"]))
-      .catch((err) => console.log(err));
+      .then((data) => this.setState({ song: data }))
+      .catch((err) => console.log("An Error occurred while fetching: ", err));
+    return <div>Song: {this.state.song}</div>;
   }
 
   render() {
     return (
       <div>
         <div>Song:</div>
-        <button onClick={this.SongList}>Get Random Song</button>
+        <button onClick={this.getRandomSong}>Get Random Song</button>
       </div>
     );
   }
