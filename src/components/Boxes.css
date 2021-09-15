@@ -1,0 +1,14 @@
+.boxes {
+  background-color: transparent;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.box {
+  background-color: white;
+  width: 80px;
+  height: 80px;
+  text-align: center;
+}

@@ -1,0 +1,7 @@
+.gameplay {
+  background-color: rgba(100, 100, 100, 0.5);
+  width: 1000px;
+  height: 700px;
+  margin: 35px auto;
+  display: flex;
+}
