@@ -13,7 +13,7 @@ class SongAPI extends React.Component {
   }
 
   getRandomSong() {
-    fetch("http://localhost:3000/songs/random")
+    fetch("http://localhost:8080/songs/random")
       .then((response) => response.json())
       .then((data) => this.setState({ song: data }))
       .catch((err) => console.log("An Error occurred while fetching: ", err));

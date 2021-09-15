@@ -1,7 +1,7 @@
 const cors = require("cors");
 const express = require("express");
 
-const port = 3000;
+const port = 8080;
 const fs = require("fs");
 const { data } = require("cheerio/lib/api/attributes");
 
@@ -30,11 +30,13 @@ const scrape = () => {
 
         let index = Math.floor(i / 2);
         if (i % 2 == 0) {
-          // i is even, element is a song title
+          // if i is even then element is a song title
+          // .. push a new object to listOfSongs
           listOfSongs.push({ Position: index + 1 });
           listOfSongs[index].Title = omg;
         } else {
-          // i is odd, element is a song artist
+          // if i is odd then element is a song artist
+          // .. add Artist property to existing object
           listOfSongs[index].Artist = omg;
         }
       });
