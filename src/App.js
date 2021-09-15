@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import SongAPI from "./API/SongAPI";
+import Main from "./components/Main";
 
 class App extends Component {
   render() {
     return (
       <div>
-        <SongAPI></SongAPI>
+        <Main></Main>
       </div>
     );
   }

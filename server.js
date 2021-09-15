@@ -2,9 +2,6 @@ const cors = require("cors");
 const express = require("express");
 
 const port = 8080;
-const fs = require("fs");
-const { data } = require("cheerio/lib/api/attributes");
-
 const app = express();
 app.use(cors());
 app.options("*", cors());
