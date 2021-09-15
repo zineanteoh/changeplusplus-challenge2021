@@ -1,10 +1,5 @@
 const cors = require("cors");
 const express = require("express");
-const neatCsv = require("neat-csv"); // temporary (remove once web scraping works)
-
-// Axios and Cheerio for web scraping
-const axios = require("axios");
-const cheerio = require("cheerio");
 
 const port = 3000;
 const fs = require("fs");
@@ -14,8 +9,13 @@ const app = express();
 app.use(cors());
 app.options("*", cors());
 
-function scrape() {
-  let data = [];
+// axios and cheerio for web scraping
+const axios = require("axios");
+const cheerio = require("cheerio");
+
+// scrapes data from website using axios and cheerio
+let listOfSongs = [];
+const scrape = () => {
   axios
     .get("https://www.billboard.com/charts/hot-100")
     .then((response) => {
@@ -24,27 +24,29 @@ function scrape() {
       const $ = cheerio.load(html);
 
       $("span.chart-element__information__song, span.chart-element__information__artist").each((i, element) => {
-        var omg = $(element).html(); // .text(); //.replace(/  +/g, " ");
-        data[i] = omg;
-        console.log("song: ", data[i]);
+        // The querySelectorAll will return
+        // ... [song1_title, song1_artist, song2_title, song2_artist, ..., song100_artist]
+        let omg = $(element).text();
+
+        let index = Math.floor(i / 2);
+        if (i % 2 == 0) {
+          // i is even, element is a song title
+          listOfSongs.push({ Position: index + 1 });
+          listOfSongs[index].Title = omg;
+        } else {
+          // i is odd, element is a song artist
+          listOfSongs[index].Artist = omg;
+        }
       });
+
+      console.log("Web scraping completed");
+      // console.log("ListOfSongs: ", listOfSongs);
     })
     .catch((err) => {
       console.log(err);
     });
-}
-
+};
 scrape();
-
-// console.log(listOfSongs.length);
-
-// fs.readFile("./output.csv", async (err, data) => {
-//   if (err) {
-//     console.error(err);
-//     return;
-//   }
-//   listOfSongs = await neatCsv(data);
-// });
 
 app.get("/songs", function (req, res) {
   return res.send(listOfSongs);
