@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class SongList extends React.Component {
+class SongAPI extends React.Component {
   constructor(props) {
     super(props);
 
@@ -17,7 +17,6 @@ class SongList extends React.Component {
       .then((response) => response.json())
       .then((data) => this.setState({ song: data }))
       .catch((err) => console.log("An Error occurred while fetching: ", err));
-    return <div>Song: {this.state.song}</div>;
   }
 
   render() {
@@ -25,9 +24,12 @@ class SongList extends React.Component {
       <div>
         <div>Song:</div>
         <button onClick={this.getRandomSong}>Get Random Song</button>
+        <div>Ranking: #{this.state.song.Position}/100</div>
+        <div>Title: {this.state.song.Title}</div>
+        <div>Artist: {this.state.song.Artist}</div>
       </div>
     );
   }
 }
 
-export default SongList;
+export default SongAPI;
