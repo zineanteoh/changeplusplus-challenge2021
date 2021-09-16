@@ -9,13 +9,13 @@
 .current-song {
   width: 100px;
   height: 130px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(170, 233, 198);
 }
 
 .next-song {
   width: 100px;
   height: 130px;
-  background-color: white;
+  background-color: rgb(233, 170, 180);
 }
 
 h4,
