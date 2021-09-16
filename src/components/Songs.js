@@ -6,7 +6,7 @@ class Songs extends Component {
     super(props);
 
     this.state = {
-      boxPos: 1,
+      boxPos: 5,
       yOffset: 0,
       yDelta: 25,
       song: {},
@@ -15,20 +15,19 @@ class Songs extends Component {
 
   componentDidMount() {
     setInterval(() => {
-      if (this.state.yOffset <= 500) {
+      if (this.state.yOffset < 500) {
         this.setState({ yOffset: this.state.yOffset + this.state.yDelta });
       } else {
+        // song goes into box -> disappear
       }
     }, 1000);
   }
 
   moveLeft = () => {
-    console.log("MOVIGN LEFT");
     this.setState({ boxPos: Math.max(1, this.state.boxPos - 1) });
   };
 
   moveRight = () => {
-    console.log("MOVIGN RIGHT");
     this.setState({ boxPos: Math.min(10, this.state.boxPos + 1) });
   };
 

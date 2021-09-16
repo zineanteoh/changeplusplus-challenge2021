@@ -17,10 +17,13 @@ class Gameplay extends Component {
 
     this.state = {
       currentSong: {},
+      nextSong: {},
+      songInQueue: {},
     };
 
-    this.getRandomSong = this.getRandomSong.bind(this);
+    this.getRandomSong = this.loadRandomSong.bind(this);
     this.song = React.createRef();
+    this.hud = React.createRef();
   }
 
   componentDidMount() {
@@ -30,24 +33,31 @@ class Gameplay extends Component {
       } else if (e.key === "ArrowRight") {
         this.song.current.moveRight();
       } else if (e.key === " ") {
-        // console.log("space");
-        this.getRandomSong();
+        // Update HUD Display
+        this.updateHUD();
+        // Load a random song from SongAPI
+        this.loadRandomSong();
       }
     });
   }
 
-  handleKeyPress() {}
+  updateHUD() {
+    // currentSong becomes nextSong & nextSong becomes songInQueue
+    this.setState({ currentSong: this.state.nextSong, nextSong: this.state.songInQueue });
+    this.hud.current.updateHUD(this.state.nextSong);
+  }
 
-  async getRandomSong() {
+  async loadRandomSong() {
+    // Load a random song from SongAPI and save to songInQueue
     let song = await SongAPI();
     console.log("we got: ", song);
-    this.setState({ currentSong: song });
+    this.setState({ songInQueue: song });
   }
 
   render() {
     return (
       <div className="gameplay">
-        <HudDisplay />
+        <HudDisplay ref={this.hud} />
         <Songs ref={this.song} />
         <Boxes />
       </div>

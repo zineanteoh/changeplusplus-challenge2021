@@ -17,3 +17,8 @@
   height: 130px;
   background-color: white;
 }
+
+h4,
+p {
+  background-color: transparent;
+}
