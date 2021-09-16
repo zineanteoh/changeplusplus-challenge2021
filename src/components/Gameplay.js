@@ -3,6 +3,7 @@ import Boxes from "./Boxes";
 import Songs from "./Songs";
 import SongAPI from "../API/SongAPI";
 import HudDisplay from "./HudDisplay";
+import Menu from "./Menu";
 import "./Gameplay.css";
 
 // start game: how many songs to choose
@@ -24,6 +25,7 @@ class Gameplay extends Component {
     };
 
     // this.getRandomSong = this.loadRandomSong.bind(this);
+    this.menu = React.createRef();
     this.song = React.createRef();
     this.hud = React.createRef();
     this.boxes = React.createRef();
@@ -57,9 +59,6 @@ class Gameplay extends Component {
       .then(() => this.updateHUD())
       .then(() => this.loadRandomSong())
       .then(() => this.updateHUD());
-    // this.updateHUD();
-    // this.loadRandomSong();
-    // this.updateHUD();
   }
 
   updateHUD() {
@@ -78,6 +77,7 @@ class Gameplay extends Component {
   render() {
     return (
       <div className="gameplay">
+        <Menu ref={this.menu} />
         <HudDisplay ref={this.hud} />
         <Songs ref={this.song} startGame={this.state.startGame} />
         <Boxes ref={this.boxes} />
