@@ -47,6 +47,10 @@ const scrape = () => {
 };
 scrape();
 
+app.get("/", function (req, res) {
+  return res.send(`<p>To view all songs: /songs</p><p>To get a random song: /songs/random</p><p>To get a specific song: /songs/:songId</p>`);
+});
+
 app.get("/songs", function (req, res) {
   return res.send(listOfSongs);
 });

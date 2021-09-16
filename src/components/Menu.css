@@ -3,14 +3,15 @@
 }
 
 .menu {
-  background-color: rgb(247, 98, 210);
+  background-color: rgb(247, 98, 210, 0.1);
   position: absolute;
   text-align: center;
-  left: 15%;
+  left: 17%;
   top: 20%;
-  width: 600px;
+  width: 550px;
   z-index: 10;
   padding: 50px;
+  color: rgb(249, 215, 239);
 }
 
 h1,
@@ -24,4 +25,12 @@ p {
   cursor: pointer;
   padding: 10px;
   margin-top: 30px;
+  background-color: rgb(244, 70, 191);
+  color: rgb(252, 239, 248);
+}
+
+.startGame {
+  margin-top: 10px;
+  font-size: 1.4rem;
+  color: rgb(255, 255, 255);
 }

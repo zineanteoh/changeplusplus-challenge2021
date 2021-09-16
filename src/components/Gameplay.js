@@ -77,9 +77,9 @@ class Gameplay extends Component {
   render() {
     return (
       <div className="gameplay">
-        <Menu ref={this.menu} />
+        {!this.state.startGame && <Menu ref={this.menu} />}
         <HudDisplay ref={this.hud} />
-        <Songs ref={this.song} startGame={this.state.startGame} />
+        {this.state.startGame && <Songs ref={this.song} startGame={this.state.startGame} />}
         <Boxes ref={this.boxes} />
       </div>
     );
