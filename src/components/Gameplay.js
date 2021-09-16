@@ -79,6 +79,7 @@ class Gameplay extends Component {
     let song = await SongAPI();
     // console.log("we got: ", song);
     while (!this.isNewSong(song)) {
+      console.log("getting random song...");
       song = await SongAPI();
     }
     this.setState({ songsInQueue: song });
@@ -89,6 +90,8 @@ class Gameplay extends Component {
     for (let i = 0; i < this.state.songHistory.length; i++) {
       // const {title, artist, position} = this.state.songHistory[i];
       if (this.isSongEqual(this.state.songHistory[i], song)) {
+        console.log("NEW SONG CAUGHT!");
+        console.log(song);
         return false;
       }
     }
@@ -96,21 +99,26 @@ class Gameplay extends Component {
   }
 
   isSongEqual(song1, song2) {
-    // let keys = Object.keys(song1);
-    // let isEqual = true;
-    // for (let i = 0; i < keys.length; i++) {
-    //   isEqual &= song1.keys.at(i) === song2.keys.at(i);
-    // }
-    // return isEqual;
-    return false;
+    // Compare two objects' keys and values
+    let song1Key = Object.keys(song1);
+    let song2Key = Object.keys(song2);
+
+    if (song1Key.length === song2Key.length) {
+      for (let i = 0; i < song1Key.length; i++) {
+        if (song1[song1Key[i]] !== song2[song1Key[i]]) {
+          return false;
+        }
+      }
+      return true;
+    } else {
+      return false;
+    }
   }
 
   addCurrentSongToHistory() {
     if (this.state.currentSong) {
       console.log("CURRENT: ", this.state.currentSong);
       let newHistory = this.state.songHistory.slice();
-      // console.log("prev_history: ", newHistory);
-      // newHistory.push(3);
       newHistory.push(this.state.currentSong);
       console.log("post_history: ", newHistory);
       this.setState({ songHistory: newHistory });
