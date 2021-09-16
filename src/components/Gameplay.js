@@ -20,8 +20,8 @@ class Gameplay extends Component {
       startGame: false,
       currentSong: {},
       nextSong: {},
-      songInQueue: {},
-      songHistory: {},
+      songsInQueue: {},
+      songHistory: [],
     };
 
     // this.getRandomSong = this.loadRandomSong.bind(this);
@@ -53,25 +53,68 @@ class Gameplay extends Component {
   }
 
   initiateGame() {
-    this.setState({ startGame: true });
     // Load two random songs and store in currentSong and nextSong
     this.loadRandomSong()
       .then(() => this.updateHUD())
       .then(() => this.loadRandomSong())
-      .then(() => this.updateHUD());
+      .then(() => this.updateHUD())
+      .then(() => this.loadRandomSong())
+      .then(() => this.setState({ startGame: true }));
+
+    // this.setState({ startGame: true });
   }
 
   updateHUD() {
-    // currentSong becomes nextSong & nextSong becomes songInQueue
-    this.setState({ currentSong: this.state.nextSong, nextSong: this.state.songInQueue });
+    // Saves currentSong into songHistory
+    if (this.state.startGame) {
+      this.addCurrentSongToHistory();
+    }
+    // currentSong becomes nextSong & nextSong becomes songsInQueue
+    this.setState({ currentSong: this.state.nextSong, nextSong: this.state.songsInQueue });
     this.hud.current.updateHUD(this.state.nextSong);
   }
 
   async loadRandomSong() {
     // Load a random song from SongAPI and save to songInQueue
     let song = await SongAPI();
-    console.log("we got: ", song);
-    this.setState({ songInQueue: song });
+    // console.log("we got: ", song);
+    while (!this.isNewSong(song)) {
+      song = await SongAPI();
+    }
+    this.setState({ songsInQueue: song });
+  }
+
+  isNewSong(song) {
+    // Checks if song exists in songHistory
+    for (let i = 0; i < this.state.songHistory.length; i++) {
+      // const {title, artist, position} = this.state.songHistory[i];
+      if (this.isSongEqual(this.state.songHistory[i], song)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  isSongEqual(song1, song2) {
+    // let keys = Object.keys(song1);
+    // let isEqual = true;
+    // for (let i = 0; i < keys.length; i++) {
+    //   isEqual &= song1.keys.at(i) === song2.keys.at(i);
+    // }
+    // return isEqual;
+    return false;
+  }
+
+  addCurrentSongToHistory() {
+    if (this.state.currentSong) {
+      console.log("CURRENT: ", this.state.currentSong);
+      let newHistory = this.state.songHistory.slice();
+      // console.log("prev_history: ", newHistory);
+      // newHistory.push(3);
+      newHistory.push(this.state.currentSong);
+      console.log("post_history: ", newHistory);
+      this.setState({ songHistory: newHistory });
+    }
   }
 
   render() {
