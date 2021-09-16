@@ -14,7 +14,10 @@ class Songs extends Component {
 
   componentDidMount() {
     setInterval(() => {
-      this.setState({ yoffset: this.state.yoffset + this.state.ydelta });
+      if (this.state.yoffset <= 500) {
+        this.setState({ yoffset: this.state.yoffset + this.state.ydelta });
+      } else {
+      }
     }, 1000);
   }
 
@@ -31,7 +34,7 @@ class Songs extends Component {
 
   render() {
     return (
-      <div className="song" style={{ top: this.state.yoffset + "px" }}>
+      <div className="song" style={{ left: "20px", top: this.state.yoffset + "px" }}>
         <div className="song-title"></div>
         <div className="song-artist"></div>
       </div>
