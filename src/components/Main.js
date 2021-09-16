@@ -5,7 +5,7 @@ import Gameplay from "./Gameplay";
 class Main extends Component {
   render() {
     return (
-      <div className="Main">
+      <div className="main">
         <Gameplay />
       </div>
     );

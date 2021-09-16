@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Boxes from "./Boxes";
 import Songs from "./Songs";
 import SongAPI from "../API/SongAPI";
+import HudDisplay from "./HudDisplay";
 import "./Gameplay.css";
 
 // start game: how many songs to choose
@@ -46,6 +47,7 @@ class Gameplay extends Component {
   render() {
     return (
       <div className="gameplay">
+        <HudDisplay />
         <Songs ref={this.song} />
         <Boxes />
       </div>

@@ -1,0 +1,19 @@
+.hud-display {
+  position: absolute;
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+}
+
+.current-song {
+  width: 100px;
+  height: 130px;
+  background-color: rgb(255, 255, 255);
+}
+
+.next-song {
+  width: 100px;
+  height: 130px;
+  background-color: white;
+}
