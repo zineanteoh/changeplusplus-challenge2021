@@ -6,35 +6,36 @@ class Songs extends Component {
     super(props);
 
     this.state = {
-      box_val: 0,
-      yoffset: 0,
-      ydelta: 25,
+      boxPos: 1,
+      yOffset: 0,
+      yDelta: 25,
+      song: {},
     };
   }
 
   componentDidMount() {
     setInterval(() => {
-      if (this.state.yoffset <= 500) {
-        this.setState({ yoffset: this.state.yoffset + this.state.ydelta });
+      if (this.state.yOffset <= 500) {
+        this.setState({ yOffset: this.state.yOffset + this.state.yDelta });
       } else {
       }
     }, 1000);
   }
 
   moveLeft = () => {
-    this.setState({ box_val: Math.min(0, this.state.box_val - 1) });
+    console.log("MOVIGN LEFT");
+    this.setState({ boxPos: Math.max(1, this.state.boxPos - 1) });
   };
 
   moveRight = () => {
-    this.setState({ box_val: Math.max(10, this.state.box_val + 1) });
+    console.log("MOVIGN RIGHT");
+    this.setState({ boxPos: Math.min(10, this.state.boxPos + 1) });
   };
 
-  // Vertical position
-  // Horizontal position {i = 1, 2, ..., 10}
-
   render() {
+    let leftPos = 20 + (this.state.boxPos - 1) * 98.3 + "px";
     return (
-      <div className="song" style={{ left: "20px", top: this.state.yoffset + "px" }}>
+      <div className="song" style={{ left: leftPos, top: this.state.yOffset + "px" }}>
         <div className="song-title"></div>
         <div className="song-artist"></div>
       </div>

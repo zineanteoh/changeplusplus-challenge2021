@@ -19,20 +19,23 @@ class Gameplay extends Component {
     };
 
     this.getRandomSong = this.getRandomSong.bind(this);
+    this.song = React.createRef();
   }
 
   componentDidMount() {
     document.addEventListener("keydown", (e) => {
       if (e.key === "ArrowLeft") {
-        console.log("left");
+        this.song.current.moveLeft();
       } else if (e.key === "ArrowRight") {
-        console.log("right");
+        this.song.current.moveRight();
       } else if (e.key === " ") {
         // console.log("space");
         this.getRandomSong();
       }
     });
   }
+
+  handleKeyPress() {}
 
   async getRandomSong() {
     let song = await SongAPI();
@@ -43,7 +46,7 @@ class Gameplay extends Component {
   render() {
     return (
       <div className="gameplay">
-        <Songs />
+        <Songs ref={this.song} />
         <Boxes />
       </div>
     );
