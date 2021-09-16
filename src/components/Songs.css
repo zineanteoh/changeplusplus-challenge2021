@@ -1,7 +1,8 @@
 .song {
-  /* width: 200px;
-  height: 200px;
-  background-color: teal; */
+  position: absolute;
+  width: 75px;
+  height: 100px;
+  background-color: teal;
 }
 
 .song-title {
