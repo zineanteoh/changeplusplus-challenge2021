@@ -16,29 +16,50 @@ class Gameplay extends Component {
     super(props);
 
     this.state = {
+      startGame: false,
       currentSong: {},
       nextSong: {},
       songInQueue: {},
+      songHistory: {},
     };
 
-    this.getRandomSong = this.loadRandomSong.bind(this);
+    // this.getRandomSong = this.loadRandomSong.bind(this);
     this.song = React.createRef();
     this.hud = React.createRef();
+    this.boxes = React.createRef();
   }
 
   componentDidMount() {
     document.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowLeft") {
-        this.song.current.moveLeft();
-      } else if (e.key === "ArrowRight") {
-        this.song.current.moveRight();
-      } else if (e.key === " ") {
-        // Update HUD Display
-        this.updateHUD();
-        // Load a random song from SongAPI
-        this.loadRandomSong();
+      if (this.state.startGame) {
+        if (e.key === "ArrowLeft") {
+          this.song.current.moveLeft();
+        } else if (e.key === "ArrowRight") {
+          this.song.current.moveRight();
+        } else if (e.key === " ") {
+          // Update HUD Display
+          this.updateHUD();
+          // Load a random song from SongAPI
+          this.loadRandomSong();
+        }
+      } else {
+        if (e.key === " ") {
+          this.initiateGame();
+        }
       }
     });
+  }
+
+  initiateGame() {
+    this.setState({ startGame: true });
+    // Load two random songs and store in currentSong and nextSong
+    this.loadRandomSong()
+      .then(() => this.updateHUD())
+      .then(() => this.loadRandomSong())
+      .then(() => this.updateHUD());
+    // this.updateHUD();
+    // this.loadRandomSong();
+    // this.updateHUD();
   }
 
   updateHUD() {
@@ -58,8 +79,8 @@ class Gameplay extends Component {
     return (
       <div className="gameplay">
         <HudDisplay ref={this.hud} />
-        <Songs ref={this.song} />
-        <Boxes />
+        <Songs ref={this.song} startGame={this.state.startGame} />
+        <Boxes ref={this.boxes} />
       </div>
     );
   }

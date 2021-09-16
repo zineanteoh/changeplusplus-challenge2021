@@ -20,8 +20,8 @@ class HudDisplay extends Component {
       <div className="hud-display">
         <div className="current-song">
           <h4>Current Song</h4>
-          <p>"{this.state.currentSong.Title || "The Sky"}"</p>
-          <p>by {this.state.currentSong.Artist || "DJ Boi"}</p>
+          <p>"{this.state.currentSong.Title}"</p>
+          <p>by {this.state.currentSong.Artist}</p>
         </div>
         <div className="next-song">
           <h4>Next Song</h4>

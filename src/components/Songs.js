@@ -15,10 +15,12 @@ class Songs extends Component {
 
   componentDidMount() {
     setInterval(() => {
-      if (this.state.yOffset < 500) {
-        this.setState({ yOffset: this.state.yOffset + this.state.yDelta });
-      } else {
-        // song goes into box -> disappear
+      if (this.props.startGame) {
+        if (this.state.yOffset < 500) {
+          this.setState({ yOffset: this.state.yOffset + this.state.yDelta });
+        } else {
+          // song goes into box -> disappear
+        }
       }
     }, 1000);
   }
