@@ -5,7 +5,7 @@ class Boxes extends Component {
   render() {
     return (
       <div className="boxes">
-        <div className="box">#1-10</div>
+        <div className="box">TOP 10</div>
         <div className="box">#11-20</div>
         <div className="box">#21-30</div>
         <div className="box">#31-40</div>

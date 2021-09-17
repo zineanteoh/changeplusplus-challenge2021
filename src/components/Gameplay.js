@@ -4,12 +4,17 @@ import Songs from "./Songs";
 import SongAPI from "../API/SongAPI";
 import HudDisplay from "./HudDisplay";
 import Menu from "./Menu";
+import Results from "./Results";
 import "./Gameplay.css";
 
-// start game: how many songs to choose(?) or time limit(?)
-// get random song from API
-// buttons to see ranking
-// see how well the user did:
+// End Game button to see user statistics:
+// .. Outputs a table of results from songHistory (div overlay)
+// .. |    Song Album    |     Artist      |       Actual Ranking      | Your Ranking
+// ..     Fair Trade           Drake                 TOP10 (#3)              TOP10      (green text)
+// ..     Junya               Kanye West            #71-80 (#78)            #41-50      (red text)
+// ..    [......]
+// .. Total Correct: 50%
+// .. User's ranking distribution: % of answered songs in each box
 
 class Gameplay extends Component {
   constructor(props) {
@@ -64,7 +69,7 @@ class Gameplay extends Component {
     if (this.state.startGame) {
       this.addCurrentSongToHistory();
     }
-    // currentSong becomes nextSong & nextSong becomes songsInQueue
+    // currentSong becomes nextSong & nextSong becomes songInQueue
     this.setState({ currentSong: this.state.nextSong, nextSong: this.state.songInQueue });
     this.hud.current.updateHUD(this.state.nextSong);
 
@@ -128,6 +133,7 @@ class Gameplay extends Component {
         <HudDisplay ref={this.hud} />
         {this.state.startGame && <Songs ref={this.song} startGame={this.state.startGame} />}
         <Boxes ref={this.boxes} />
+        <Results />
       </div>
     );
   }
