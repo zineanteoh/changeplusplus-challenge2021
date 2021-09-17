@@ -44,7 +44,7 @@ class Songs extends Component {
   render() {
     let leftPos = 20 + (this.state.boxPos - 1) * 98.3;
 
-    if (this.props.startGame && !this.props.endGame) {
+    if (this.props.startGame && !this.props.pauseGame) {
       return (
         <div>
           <div className="song" style={{ left: leftPos + "px", top: this.state.yOffset + "px" }}>

@@ -50,12 +50,12 @@ class Gameplay extends Component {
             this.song.current.resetSongYOffset();
           } else if (e.key === "p") {
             // pause game
-            this.setState({ endGame: !this.state.pauseGame });
+            this.setState({ pauseGame: !this.state.pauseGame });
           }
         } else {
           if (e.key === "p") {
             // resume game
-            this.setState({ endGame: !this.state.pauseGame });
+            this.setState({ pauseGame: !this.state.pauseGame });
           }
         }
       } else {
@@ -142,14 +142,14 @@ class Gameplay extends Component {
   }
 
   render() {
-    const { pauseGame: endGame, startGame } = this.state;
+    const { pauseGame: pauseGame, startGame } = this.state;
     return (
       <div className="gameplay">
         {!startGame && <Menu ref={this.menu} />}
-        {!endGame && <HudDisplay ref={this.hud} />}
-        {<Songs ref={this.song} startGame={startGame} endGame={endGame} />}
-        {!endGame && <Boxes ref={this.boxes} />}
-        {endGame && <Results />}
+        {!pauseGame && <HudDisplay ref={this.hud} />}
+        {<Songs ref={this.song} startGame={startGame} pauseGame={pauseGame} />}
+        {!pauseGame && <Boxes ref={this.boxes} />}
+        {pauseGame && <Results />}
       </div>
     );
   }
