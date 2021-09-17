@@ -33,7 +33,7 @@ class Songs extends Component {
     this.setState({ boxPos: Math.min(10, this.state.boxPos + 1) });
   }
 
-  resetSong() {
+  resetSongYOffset() {
     this.setState({ boxPos: 5, yOffset: 0 });
   }
 

@@ -6,11 +6,10 @@ import HudDisplay from "./HudDisplay";
 import Menu from "./Menu";
 import "./Gameplay.css";
 
-// start game: how many songs to choose
+// start game: how many songs to choose(?) or time limit(?)
 // get random song from API
-// animate song falling down
-// keyboard controls / event listeners
 // buttons to see ranking
+// see how well the user did:
 
 class Gameplay extends Component {
   constructor(props) {
@@ -20,7 +19,7 @@ class Gameplay extends Component {
       startGame: false,
       currentSong: {},
       nextSong: {},
-      songsInQueue: {},
+      songInQueue: {},
       songHistory: [],
     };
 
@@ -39,13 +38,8 @@ class Gameplay extends Component {
         } else if (e.key === "ArrowRight") {
           this.song.current.moveRight();
         } else if (e.key === " ") {
-          // Update HUD Display
-          this.updateHUD();
-          // Load a random song from SongAPI
-          this.loadRandomSong();
-          // get boxPos of song, then store its corresponding ranking into state
-
-          this.song.current.resetSong();
+          this.runNextSong();
+          this.song.current.resetSongYOffset();
         }
       } else {
         if (e.key === " ") {
@@ -58,21 +52,24 @@ class Gameplay extends Component {
   initiateGame() {
     // Load two random songs and store in currentSong and nextSong
     this.loadRandomSong()
-      .then(() => this.updateHUD())
+      .then(() => this.runNextSong())
       .then(() => this.loadRandomSong())
-      .then(() => this.updateHUD())
+      .then(() => this.runNextSong())
       .then(() => this.loadRandomSong())
       .then(() => this.setState({ startGame: true }));
   }
 
-  updateHUD() {
+  runNextSong() {
     // Saves currentSong into songHistory
     if (this.state.startGame) {
       this.addCurrentSongToHistory();
     }
     // currentSong becomes nextSong & nextSong becomes songsInQueue
-    this.setState({ currentSong: this.state.nextSong, nextSong: this.state.songsInQueue });
+    this.setState({ currentSong: this.state.nextSong, nextSong: this.state.songInQueue });
     this.hud.current.updateHUD(this.state.nextSong);
+
+    // Load a random song from SongAPI
+    this.loadRandomSong();
   }
 
   async loadRandomSong() {
@@ -83,7 +80,7 @@ class Gameplay extends Component {
       console.log("getting random song...");
       song = await SongAPI();
     }
-    this.setState({ songsInQueue: song });
+    this.setState({ songInQueue: song });
   }
 
   isNewSong(song) {
@@ -119,10 +116,9 @@ class Gameplay extends Component {
   addCurrentSongToHistory() {
     if (this.state.currentSong) {
       console.log("CURRENT: ", this.state.currentSong);
-      let newHistory = this.state.songHistory.slice();
-      newHistory.push(this.state.currentSong);
-      console.log("post_history: ", newHistory);
-      this.setState({ songHistory: newHistory });
+      this.setState({ songHistory: [...this.state.songHistory, this.state.currentSong] });
+      // updatedCurrentSong["Box"] = this.song.current.boxPos;
+      // Add song box to currentsong
     }
   }
 
