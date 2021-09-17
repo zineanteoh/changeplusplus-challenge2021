@@ -13,6 +13,10 @@ class Songs extends Component {
     };
   }
 
+  loadSong(song) {
+    this.setState({ song: song });
+  }
+
   componentDidMount() {
     setInterval(() => {
       if (this.props.startGame) {
@@ -39,15 +43,19 @@ class Songs extends Component {
 
   render() {
     let leftPos = 20 + (this.state.boxPos - 1) * 98.3;
-    return (
-      <div>
-        <div className="song" style={{ left: leftPos + "px", top: this.state.yOffset + "px" }}>
-          <div className="song-title"></div>
-          <div className="song-artist"></div>
+
+    if (this.props.startGame && !this.props.endGame) {
+      return (
+        <div>
+          <div className="song" style={{ left: leftPos + "px", top: this.state.yOffset + "px" }}>
+            Dropping: {this.state.song["Title"]}
+          </div>
+          <div className="box-select" style={{ left: leftPos - 7 + "px" }}></div>
         </div>
-        <div className="box-select" style={{ left: leftPos - 7 + "px" }}></div>
-      </div>
-    );
+      );
+    } else {
+      return <div></div>;
+    }
   }
 }
 

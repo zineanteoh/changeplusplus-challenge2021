@@ -1,0 +1,14 @@
+.results {
+  background-color: rgba(164, 60, 233, 0.6);
+  position: absolute;
+  text-align: center;
+  width: 700px;
+  height: 500px;
+  left: 15%;
+  top: 15%;
+}
+
+h1 {
+  margin-top: 30px;
+  color: rgb(243, 227, 254);
+}

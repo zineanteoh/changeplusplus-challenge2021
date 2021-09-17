@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import "./Results.css";
 
 class Results extends Component {
   render() {
     return (
-      <div>
-        <div></div>
+      <div className="results">
+        <h1>Your Result</h1>
       </div>
     );
   }

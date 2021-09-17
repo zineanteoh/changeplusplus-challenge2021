@@ -23,6 +23,7 @@ class Gameplay extends Component {
 
     this.state = {
       startGame: false,
+      pauseGame: false,
       currentSong: {},
       nextSong: {},
       songInQueue: {},
@@ -39,13 +40,23 @@ class Gameplay extends Component {
   componentDidMount() {
     document.addEventListener("keydown", (e) => {
       if (this.state.startGame) {
-        if (e.key === "ArrowLeft") {
-          this.song.current.moveLeft();
-        } else if (e.key === "ArrowRight") {
-          this.song.current.moveRight();
-        } else if (e.key === " ") {
-          this.runNextSong();
-          this.song.current.resetSongYOffset();
+        if (!this.state.pauseGame) {
+          if (e.key === "ArrowLeft") {
+            this.song.current.moveLeft();
+          } else if (e.key === "ArrowRight") {
+            this.song.current.moveRight();
+          } else if (e.key === " ") {
+            this.runNextSong();
+            this.song.current.resetSongYOffset();
+          } else if (e.key === "p") {
+            // pause game
+            this.setState({ endGame: !this.state.pauseGame });
+          }
+        } else {
+          if (e.key === "p") {
+            // resume game
+            this.setState({ endGame: !this.state.pauseGame });
+          }
         }
       } else {
         if (e.key === " ") {
@@ -73,6 +84,9 @@ class Gameplay extends Component {
     // currentSong becomes nextSong & nextSong becomes songInQueue
     this.setState({ currentSong: this.state.nextSong, nextSong: this.state.songInQueue });
     this.hud.current.updateHUD(this.state.nextSong);
+
+    // Save currentSong into Song
+    this.song.current.loadSong(this.state.currentSong);
 
     // Load a random song from SongAPI
     this.loadRandomSong();
@@ -128,13 +142,14 @@ class Gameplay extends Component {
   }
 
   render() {
+    const { pauseGame: endGame, startGame } = this.state;
     return (
       <div className="gameplay">
-        {!this.state.startGame && <Menu ref={this.menu} />}
-        <HudDisplay ref={this.hud} />
-        {this.state.startGame && <Songs ref={this.song} startGame={this.state.startGame} />}
-        <Boxes ref={this.boxes} />
-        <Results />
+        {!startGame && <Menu ref={this.menu} />}
+        {!endGame && <HudDisplay ref={this.hud} />}
+        {<Songs ref={this.song} startGame={startGame} endGame={endGame} />}
+        {!endGame && <Boxes ref={this.boxes} />}
+        {endGame && <Results />}
       </div>
     );
   }
