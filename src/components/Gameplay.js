@@ -56,6 +56,7 @@ class Gameplay extends Component {
           if (e.key === "p") {
             // resume game
             this.setState({ pauseGame: !this.state.pauseGame });
+            // this.hud.current.updateHUD();
           }
         }
       } else {
@@ -142,11 +143,11 @@ class Gameplay extends Component {
   }
 
   render() {
-    const { pauseGame: pauseGame, startGame } = this.state;
+    const { startGame, pauseGame } = this.state;
     return (
       <div className="gameplay">
         {!startGame && <Menu ref={this.menu} />}
-        {!pauseGame && <HudDisplay ref={this.hud} />}
+        {<HudDisplay ref={this.hud} pauseGame={pauseGame} />}
         {<Songs ref={this.song} startGame={startGame} pauseGame={pauseGame} />}
         {!pauseGame && <Boxes ref={this.boxes} />}
         {pauseGame && <Results />}
