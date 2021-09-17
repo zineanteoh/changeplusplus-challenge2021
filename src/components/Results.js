@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./Results.css";
 
+const ranking = ["TOP 10", "#11-20", "#21-30", "#31-40", "#41-50", "#51-60", "#61-70", "#71-80", "#81-90", "#91-100"];
+
 function processSongHistory(songHistory) {
   let arr = [];
   for (let i = 0; i < songHistory.length; i++) {
@@ -22,8 +24,19 @@ function processSongObject(song) {
 }
 
 function getRankingFromBoxPos(boxPos) {
-  const ranking = ["TOP 10", "#11-20", "#21-30", "#31-40", "#41-50", "#51-60", "#61-70", "#71-80", "#81-90", "#91-100"];
   return ranking[boxPos - 1];
+}
+
+function checkUserAnswer(row) {
+  let box = ranking.indexOf(row[3]) + 1;
+  let result = Math.ceil(row[2] / 10.0);
+  if (box == result) {
+    // return green (correct)
+    return "rgb(6, 233, 45)";
+  } else {
+    // return red (wrong)
+    return "rgb(239, 13, 33)";
+  }
 }
 
 class Results extends Component {
@@ -66,10 +79,12 @@ class Table extends Component {
 class TableRow extends Component {
   render() {
     let row = this.props.row;
+    console.log("this is row: ", row);
+    let color = checkUserAnswer(row);
     return (
       <tr>
         {row.map((val) => (
-          <td>{val}</td>
+          <td style={{ color: color }}>{val}</td>
         ))}
       </tr>
     );
