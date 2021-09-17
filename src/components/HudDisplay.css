@@ -9,12 +9,14 @@
 .current-song {
   width: 100px;
   height: 130px;
+  margin: 10px;
   background-color: rgb(170, 233, 198);
 }
 
 .next-song {
   width: 100px;
   height: 130px;
+  margin: 10px;
   background-color: rgb(233, 170, 180);
 }
 

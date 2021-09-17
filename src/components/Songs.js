@@ -25,13 +25,17 @@ class Songs extends Component {
     }, 1000);
   }
 
-  moveLeft = () => {
+  moveLeft() {
     this.setState({ boxPos: Math.max(1, this.state.boxPos - 1) });
-  };
+  }
 
-  moveRight = () => {
+  moveRight() {
     this.setState({ boxPos: Math.min(10, this.state.boxPos + 1) });
-  };
+  }
+
+  resetSong() {
+    this.setState({ boxPos: 5, yOffset: 0 });
+  }
 
   render() {
     let leftPos = 20 + (this.state.boxPos - 1) * 98.3 + "px";

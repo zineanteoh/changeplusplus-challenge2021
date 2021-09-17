@@ -43,6 +43,9 @@ class Gameplay extends Component {
           this.updateHUD();
           // Load a random song from SongAPI
           this.loadRandomSong();
+          // get boxPos of song, then store its corresponding ranking into state
+
+          this.song.current.resetSong();
         }
       } else {
         if (e.key === " ") {
@@ -60,8 +63,6 @@ class Gameplay extends Component {
       .then(() => this.updateHUD())
       .then(() => this.loadRandomSong())
       .then(() => this.setState({ startGame: true }));
-
-    // this.setState({ startGame: true });
   }
 
   updateHUD() {
