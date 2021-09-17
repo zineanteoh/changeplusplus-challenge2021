@@ -4,6 +4,7 @@
   height: 75px;
   background-color: rgb(170, 233, 198);
   z-index: 2;
+  text-align: center;
 }
 
 .box-select {

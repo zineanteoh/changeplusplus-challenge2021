@@ -4,6 +4,7 @@
   background-color: transparent;
   display: flex;
   justify-content: space-between;
+  text-align: center;
 }
 
 .current-song {

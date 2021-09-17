@@ -21,13 +21,15 @@ class HudDisplay extends Component {
         <div className="hud-display">
           <div className="current-song">
             <h4>Current Song</h4>
-            <p>"{this.state.currentSong.Title}"</p>
-            <p>by {this.state.currentSong.Artist}</p>
+            <br />
+            <p>{this.state.currentSong.Title}</p>
+            <p>{this.state.currentSong.Artist}</p>
           </div>
           <div className="next-song">
             <h4>Next Song</h4>
-            <p>"{this.state.nextSong.Title}"</p>
-            <p>by {this.state.nextSong.Artist}</p>
+            <br />
+            <p>{this.state.nextSong.Title}</p>
+            <p>{this.state.nextSong.Artist}</p>
           </div>
         </div>
       );

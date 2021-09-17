@@ -77,7 +77,7 @@ class Gameplay extends Component {
       .then(() => this.setState({ startGame: true }));
   }
 
-  runNextSong() {
+  runNextSong = () => {
     // Saves currentSong into songHistory
     if (this.state.startGame) {
       this.addCurrentSongToHistory();
@@ -91,7 +91,7 @@ class Gameplay extends Component {
 
     // Load a random song from SongAPI
     this.loadRandomSong();
-  }
+  };
 
   async loadRandomSong() {
     // Load a random song from SongAPI and save to songInQueue
@@ -148,7 +148,7 @@ class Gameplay extends Component {
       <div className="gameplay">
         {!startGame && <Menu ref={this.menu} />}
         {<HudDisplay ref={this.hud} pauseGame={pauseGame} />}
-        {<Songs ref={this.song} startGame={startGame} pauseGame={pauseGame} />}
+        {<Songs ref={this.song} startGame={startGame} pauseGame={pauseGame} runNextSong={this.runNextSong} />}
         {!pauseGame && <Boxes ref={this.boxes} />}
         {pauseGame && <Results />}
       </div>

@@ -8,7 +8,7 @@ class Songs extends Component {
     this.state = {
       boxPos: 5,
       yOffset: 0,
-      yDelta: 25,
+      yDelta: 30,
       song: {},
     };
   }
@@ -24,9 +24,11 @@ class Songs extends Component {
           this.setState({ yOffset: this.state.yOffset + this.state.yDelta });
         } else {
           // song goes into box -> disappear
+          this.props.runNextSong();
+          this.resetSongYOffset();
         }
       }
-    }, 1000);
+    }, 750);
   }
 
   moveLeft() {
@@ -48,7 +50,8 @@ class Songs extends Component {
       return (
         <div>
           <div className="song" style={{ left: leftPos + "px", top: this.state.yOffset + "px" }}>
-            Dropping: {this.state.song["Title"]}
+            <p>Dropping...</p>
+            <p>{this.state.song["Title"]}</p>
           </div>
           <div className="box-select" style={{ left: leftPos - 7 + "px" }}></div>
         </div>
