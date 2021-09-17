@@ -118,8 +118,6 @@ class Gameplay extends Component {
       console.log("CURRENT: ", this.state.currentSong);
       let songData = { ...this.state.currentSong, Box: this.song.current.state.boxPos };
       this.setState({ songHistory: [...this.state.songHistory, songData] });
-      // updatedCurrentSong["Box"] = this.song.current.boxPos;
-      // Add song box to currentsong
     }
   }
 
