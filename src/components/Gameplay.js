@@ -150,7 +150,7 @@ class Gameplay extends Component {
         {<HudDisplay ref={this.hud} pauseGame={pauseGame} />}
         {<Songs ref={this.song} startGame={startGame} pauseGame={pauseGame} runNextSong={this.runNextSong} />}
         {!pauseGame && <Boxes ref={this.boxes} />}
-        {pauseGame && <Results />}
+        {pauseGame && <Results songHistory={this.state.songHistory} />}
       </div>
     );
   }
