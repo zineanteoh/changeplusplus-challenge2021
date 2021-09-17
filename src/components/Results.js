@@ -10,16 +10,20 @@ function processSongHistory(songHistory) {
 }
 
 function processSongObject(song) {
-  // turns
-  // {"Artist": "A", "Title": "Song", "Position": 3, "Box": 9}
-  // into
-  // ["Song", "A", 3, 9]
+  // turns a song object from
+  // ... {"Artist": "A", "Title": "Song", "Position": 3, "Box": 9}
+  // into ["Song", "A", 3, 9]
   let arr = [];
   arr.push(song["Title"]);
   arr.push(song["Artist"]);
   arr.push(song["Position"]);
-  arr.push(song["Box"]);
+  arr.push(getRankingFromBoxPos(song["Box"]));
   return arr;
+}
+
+function getRankingFromBoxPos(boxPos) {
+  const ranking = ["TOP 10", "#11-20", "#21-30", "#31-40", "#41-50", "#51-60", "#61-70", "#71-80", "#81-90", "#91-100"];
+  return ranking[boxPos - 1];
 }
 
 class Results extends Component {

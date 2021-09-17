@@ -6,6 +6,8 @@
   height: 500px;
   left: 15%;
   top: 15%;
+  overflow-y: scroll;
+  padding-bottom: 30px;
 }
 
 h1 {
