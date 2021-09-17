@@ -7,7 +7,8 @@ import Menu from "./Menu";
 import Results from "./Results";
 import "./Gameplay.css";
 
-// End Game button to see user statistics:
+// TODO:
+// [1] End Game button to see user statistics:
 // .. Outputs a table of results from songHistory (div overlay)
 // .. |    Song Album    |     Artist      |       Actual Ranking      | Your Ranking
 // ..     Fair Trade           Drake                 TOP10 (#3)              TOP10      (green text)

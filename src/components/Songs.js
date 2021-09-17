@@ -38,11 +38,14 @@ class Songs extends Component {
   }
 
   render() {
-    let leftPos = 20 + (this.state.boxPos - 1) * 98.3 + "px";
+    let leftPos = 20 + (this.state.boxPos - 1) * 98.3;
     return (
-      <div className="song" style={{ left: leftPos, top: this.state.yOffset + "px" }}>
-        <div className="song-title"></div>
-        <div className="song-artist"></div>
+      <div>
+        <div className="song" style={{ left: leftPos + "px", top: this.state.yOffset + "px" }}>
+          <div className="song-title"></div>
+          <div className="song-artist"></div>
+        </div>
+        <div className="box-select" style={{ left: leftPos - 7 + "px" }}></div>
       </div>
     );
   }

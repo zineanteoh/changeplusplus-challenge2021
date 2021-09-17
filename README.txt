@@ -21,3 +21,7 @@ Reading the program
 > 
 
 Reflection on the Challenge
+> 
+
+Challenges I faced
+> 
