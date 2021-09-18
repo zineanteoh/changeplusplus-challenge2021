@@ -1,43 +1,9 @@
 import React, { Component } from "react";
 import "./Results.css";
 
-const ranking = ["TOP 10", "#11-20", "#21-30", "#31-40", "#41-50", "#51-60", "#61-70", "#71-80", "#81-90", "#91-100"];
+// export: RANKING, Results and checkUserAnswer
 
-function processSongHistory(songHistory) {
-  let arr = [];
-  for (let i = 0; i < songHistory.length; i++) {
-    arr.push(processSongObject(songHistory[i]));
-  }
-  return arr;
-}
-
-function processSongObject(song) {
-  // turns a song object from
-  // ... {"Artist": "A", "Title": "Song", "Position": 3, "Box": 9}
-  // into ["Song", "A", 3, 9]
-  let arr = [];
-  arr.push(song["Title"]);
-  arr.push(song["Artist"]);
-  arr.push(song["Position"]);
-  arr.push(getRankingFromBoxPos(song["Box"]));
-  return arr;
-}
-
-function getRankingFromBoxPos(boxPos) {
-  return ranking[boxPos - 1];
-}
-
-function checkUserAnswer(row) {
-  let box = ranking.indexOf(row[3]) + 1;
-  let result = Math.ceil(row[2] / 10.0);
-  if (box == result) {
-    // return green (correct)
-    return "rgb(6, 233, 45)";
-  } else {
-    // return red (wrong)
-    return "rgb(239, 13, 33)";
-  }
-}
+export const RANKING = ["TOP 10", "#11-20", "#21-30", "#31-40", "#41-50", "#51-60", "#61-70", "#71-80", "#81-90", "#91-100"];
 
 class Results extends Component {
   render() {
@@ -79,8 +45,8 @@ class Table extends Component {
 class TableRow extends Component {
   render() {
     let row = this.props.row;
-    console.log("this is row: ", row);
-    let color = checkUserAnswer(row);
+    // console.log("this is row: ", row);
+    let color = checkUserAnswer(row[3], row[2]) ? "rgb(6, 233, 45)" : "rgb(239, 13, 33)";
     return (
       <tr>
         {row.map((val) => (
@@ -92,3 +58,33 @@ class TableRow extends Component {
 }
 
 export default Results;
+
+function processSongHistory(songHistory) {
+  let arr = [];
+  for (let i = 0; i < songHistory.length; i++) {
+    arr.push(processSongObject(songHistory[i]));
+  }
+  return arr;
+}
+
+function processSongObject(song) {
+  // turns a song object from
+  // ... {"Artist": "A", "Title": "Song", "Position": 3, "Box": 9}
+  // into ["Song", "A", 3, 9]
+  let arr = [];
+  arr.push(song["Title"]);
+  arr.push(song["Artist"]);
+  arr.push(song["Position"]);
+  arr.push(getRankingFromBoxPos(song["Box"]));
+  return arr;
+}
+
+function getRankingFromBoxPos(boxPos) {
+  return RANKING[boxPos - 1];
+}
+
+export function checkUserAnswer(boxPos, position) {
+  let box = RANKING.indexOf(boxPos) + 1;
+  let result = Math.ceil(position / 10.0);
+  return box === result;
+}

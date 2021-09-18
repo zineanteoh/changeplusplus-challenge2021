@@ -4,18 +4,13 @@ import Songs from "./Songs";
 import SongAPI from "../API/SongAPI";
 import HudDisplay from "./HudDisplay";
 import Menu from "./Menu";
-import Results from "./Results";
+import Results, { checkUserAnswer, RANKING } from "./Results";
 import "./Gameplay.css";
 
 // TODO:
-// [1] End Game button to see user statistics:
-// .. Outputs a table of results from songHistory (div overlay)
-// .. |    Song Album    |     Artist      |       Actual Ranking      | Your Ranking
-// ..     Fair Trade           Drake                 TOP10 (#3)              TOP10      (green text)
-// ..     Junya               Kanye West            #71-80 (#78)            #41-50      (red text)
-// ..    [......]
-// .. Total Correct: 50%
-// .. User's ranking distribution: % of answered songs in each box
+// Alert user immediately of their correctness
+// Press [P] to see results
+// .. press [P] to resume game
 
 class Gameplay extends Component {
   constructor(props) {
@@ -46,6 +41,8 @@ class Gameplay extends Component {
           } else if (e.key === "ArrowRight") {
             this.song.current.moveRight();
           } else if (e.key === " ") {
+            // Alert user if they got right/wrong
+            this.revealAnswer();
             this.runNextSong();
             this.song.current.resetSongYOffset();
           } else if (e.key === "p") {
@@ -77,6 +74,14 @@ class Gameplay extends Component {
       .then(() => this.setState({ startGame: true }));
   }
 
+  revealAnswer() {
+    if (checkUserAnswer(RANKING[this.song.current.state.boxPos - 1], this.song.current.state.song.Position)) {
+      console.log("CORRECT");
+    } else {
+      console.log("WRONG");
+    }
+  }
+
   runNextSong = () => {
     // Saves currentSong into songHistory
     if (this.state.startGame) {
@@ -89,7 +94,7 @@ class Gameplay extends Component {
     // Save currentSong into Song
     this.song.current.loadSong(this.state.currentSong);
 
-    // Load a random song from SongAPI
+    // Load a random song from SongAPI into songInQueue
     this.loadRandomSong();
   };
 
@@ -98,7 +103,7 @@ class Gameplay extends Component {
     let song = await SongAPI();
     // console.log("we got: ", song);
     while (!this.isNewSong(song)) {
-      console.log("getting random song...");
+      // console.log("getting random song...");
       song = await SongAPI();
     }
     this.setState({ songInQueue: song });
@@ -107,10 +112,9 @@ class Gameplay extends Component {
   isNewSong(song) {
     // Checks if song exists in songHistory
     for (let i = 0; i < this.state.songHistory.length; i++) {
-      // const {title, artist, position} = this.state.songHistory[i];
       if (this.isSongEqual(this.state.songHistory[i], song)) {
-        console.log("NEW SONG CAUGHT!");
-        console.log(song);
+        // console.log("NEW SONG CAUGHT!");
+        // console.log(song);
         return false;
       }
     }
@@ -136,7 +140,7 @@ class Gameplay extends Component {
 
   addCurrentSongToHistory() {
     if (this.state.currentSong) {
-      console.log("CURRENT: ", this.state.currentSong);
+      // console.log("CURRENT: ", this.state.currentSong);
       let songData = { ...this.state.currentSong, Box: this.song.current.state.boxPos };
       this.setState({ songHistory: [...this.state.songHistory, songData] });
     }
