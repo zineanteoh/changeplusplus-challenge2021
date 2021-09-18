@@ -43,8 +43,6 @@ class Gameplay extends Component {
           } else if (e.key === "ArrowRight") {
             this.song.current.moveRight();
           } else if (e.key === " ") {
-            this.popup.current.animatePopup(this.state.currentSong["Position"]);
-            this.revealAnswer();
             this.runNextSong();
           } else if (e.key === "p") {
             // pause game
@@ -85,6 +83,13 @@ class Gameplay extends Component {
   }
 
   runNextSong = () => {
+    if (this.state.currentSong["Position"]) {
+      // Only animate popup when currentSong is defined
+      this.popup.current.animatePopup(this.state.currentSong["Position"]);
+    }
+    console.log(this.state.currentSong["Position"]);
+    this.revealAnswer();
+
     // Saves currentSong into songHistory
     if (this.state.startGame) {
       this.addCurrentSongToHistory();
