@@ -25,3 +25,9 @@ h4,
 p {
   background-color: transparent;
 }
+
+.song-artist {
+  font-style: italic;
+  font-size: 0.8rem;
+  color: rgb(87, 87, 87);
+}

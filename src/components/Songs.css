@@ -17,4 +17,6 @@
 
 .song p:first-child {
   font-weight: bold;
+  margin-top: 2px;
+  margin-bottom: 2px;
 }

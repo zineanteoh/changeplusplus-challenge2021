@@ -5,6 +5,7 @@ import SongAPI from "../API/SongAPI";
 import HudDisplay from "./HudDisplay";
 import Menu from "./Menu";
 import Results, { checkUserAnswer, RANKING } from "./Results";
+import PopupMessage from "./PopupMessage";
 import "./Gameplay.css";
 
 // TODO:
@@ -30,6 +31,7 @@ class Gameplay extends Component {
     this.song = React.createRef();
     this.hud = React.createRef();
     this.boxes = React.createRef();
+    this.popup = React.createRef();
   }
 
   componentDidMount() {
@@ -41,6 +43,7 @@ class Gameplay extends Component {
           } else if (e.key === "ArrowRight") {
             this.song.current.moveRight();
           } else if (e.key === " ") {
+            this.popup.current.animatePopup(this.state.currentSong["Position"]);
             this.revealAnswer();
             this.runNextSong();
           } else if (e.key === "p") {
@@ -70,13 +73,14 @@ class Gameplay extends Component {
       .then(() => this.runNextSong())
       .then(() => this.loadRandomSong())
       .then(() => this.setState({ startGame: true }));
+    // Fade in start game message [animation]
   }
 
   revealAnswer() {
     if (checkUserAnswer(RANKING[this.song.current.state.boxPos - 1], this.song.current.state.song.Position)) {
-      this.setState({ alertMessage: congratulateMessage() });
+      this.setState({ alertMessage: "Correct!" });
     } else {
-      this.setState({ alertMessage: encouragementMessage() });
+      this.setState({ alertMessage: "Nice Try!" });
     }
   }
 
@@ -155,7 +159,7 @@ class Gameplay extends Component {
         {<HudDisplay ref={this.hud} pauseGame={pauseGame} />}
         {<Songs ref={this.song} startGame={startGame} pauseGame={pauseGame} runNextSong={this.runNextSong} />}
         {!pauseGame && <Boxes ref={this.boxes} />}
-        <div className="alert-message">{this.state.alertMessage}</div>
+        <PopupMessage ref={this.popup} message={this.state.alertMessage} ranking={this.state.currentSong["Position"]} />
         {pauseGame && <Results songHistory={this.state.songHistory} />}
       </div>
     );
@@ -164,13 +168,13 @@ class Gameplay extends Component {
 
 export default Gameplay;
 
-const congratulateMessages = ["Marvelouso!!", "Spectacular!!", "Impressive!!!", "DJ in the making!!!", "Wonderful!", "That was right!"];
-const encouragementMessages = ["Nice Guess...", "Keep Trying...", "Good Guess...", "You were close...", "It's okay."];
+// const congratulateMessages = ["Marvelouso!!", "Spectacular!!", "Impressive!!!", "DJ in the making!!!", "Wonderful!", "That was right!"];
+// const encouragementMessages = ["Nice Guess...", "Keep Trying...", "Good Guess...", "You were close...", "It's okay."];
 
-function congratulateMessage() {
-  return congratulateMessages[Math.floor(Math.random() * congratulateMessages.length)];
-}
+// function congratulateMessage() {
+//   return congratulateMessages[Math.floor(Math.random() * congratulateMessages.length)];
+// }
 
-function encouragementMessage() {
-  return encouragementMessages[Math.floor(Math.random() * encouragementMessages.length)];
-}
+// function encouragementMessage() {
+//   return encouragementMessages[Math.floor(Math.random() * encouragementMessages.length)];
+// }
