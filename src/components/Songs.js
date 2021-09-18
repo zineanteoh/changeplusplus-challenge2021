@@ -50,7 +50,7 @@ class Songs extends Component {
       return (
         <div>
           <div className="song" style={{ left: leftPos + "px", top: this.state.yOffset + "px" }}>
-            <p>Dropping...</p>
+            <p>Song:</p>
             <p>{this.state.song["Title"]}</p>
           </div>
           <div className="box-select" style={{ left: leftPos - 7 + "px" }}></div>

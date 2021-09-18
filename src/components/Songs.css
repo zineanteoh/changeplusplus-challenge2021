@@ -14,3 +14,7 @@
   background-color: rgb(151, 176, 249, 0.2);
   z-index: 1;
 }
+
+.song p:first-child {
+  font-weight: bold;
+}
