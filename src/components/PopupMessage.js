@@ -8,6 +8,7 @@ class PopupMessage extends Component {
     this.state = {
       popup: false,
       ranking: 0,
+      isFading: true,
     };
   }
 
@@ -15,8 +16,12 @@ class PopupMessage extends Component {
     let that = this;
     this.setState({ ranking: ranking });
     this.setState({ popup: true });
+    this.setState({ isFading: true });
     window.setTimeout(function () {
-      that.setState({ popup: false });
+      if (that.state.isFading) {
+        that.setState({ popup: false });
+      }
+      that.setState({ fading: false });
     }, 1000);
   }
 
