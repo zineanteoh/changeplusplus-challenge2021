@@ -160,6 +160,7 @@ class Gameplay extends Component {
       <div className="gameplay">
         {!startGame && <Menu ref={this.menu} />}
         {<HudDisplay ref={this.hud} pauseGame={pauseGame} />}
+        {startGame && !pauseGame && <p className="pauseInstruction">Press [P] to see game results</p>}
         {<Songs ref={this.song} startGame={startGame} pauseGame={pauseGame} runNextSong={this.runNextSong} />}
         {!pauseGame && <Boxes ref={this.boxes} />}
         <PopupMessage ref={this.popup} message={this.state.alertMessage} ranking={this.state.currentSong["Position"]} />

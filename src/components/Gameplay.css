@@ -6,3 +6,11 @@
   display: flex;
   position: relative;
 }
+
+.pauseInstruction {
+  color: white;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  top: 1%;
+}
