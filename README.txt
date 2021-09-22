@@ -36,18 +36,18 @@ Reading the program
 > Responsible for alerting user of their correctness
 
 Reflection on the Challenge
-> This challenge taught me a lot. This was my first time learning React, writing API, learning Node.js, 
-and performing web scraping. I was glad that I managed to take things one step at a time (not to be 
-overwhelmed by the amount of 'new knowledge' and beat myself for not knowing them). At times I felt 
-clueless (i.e. How do I scrape and process the songs into an array?), but I still managed to learn how
-to do so by googling and finding the relevant resources. 
+> This challenge taught me a lot. This was my first time learning React, writing RESTfulAPI, learning 
+Node.js, and performing web scraping. I was glad that I managed to take things one step at a time 
+(not to be overwhelmed by the amount of 'new knowledge' and beat myself for not knowing them). 
+At times I felt clueless (i.e. How do I scrape and process the songs into an array?), but I still 
+managed to learn how to do most of the things by googling, thinking, and occasionally trial-and-errors. 
 
 Challenges I faced
-> Knowing my limitations - I originally had a more ambitious idea for this challenge, but decided to
-dump that because I knew I was not experienced enough for it. I settled for a tetris-like game mechanics
+> Knowing my limitations - I originally had more ambitious ideas for this challenge, but decided to
+scratch that because I knew I was not experienced enough for it. I settled for a tetris-like game mechanics
 instead. 
 > Designs - I don't consider myself the best designer, and I definitely think there are many design-related 
-things that could be improved. 
-> General programming structure - As much as I can I tried to make my code readable for others. However, 
+things that could be improved (font-readability, color choices, borders, so many...)
+> General programming structure - As much as I can I try to make my code readable for others. However, 
 I often think that certain parts of my code can certainly be improved, whether that is readability or 
-efficiency. It is still something that I have to work on. 
+efficiency. It is still something that I have to work on (any feedback is appreciated)
