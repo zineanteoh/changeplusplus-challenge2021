@@ -14,3 +14,11 @@ h1 {
   margin-top: 30px;
   color: rgb(243, 227, 254);
 }
+
+.resultsInstruction p {
+  color: white;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  top: 10%;
+}

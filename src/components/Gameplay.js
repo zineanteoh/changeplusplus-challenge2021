@@ -9,7 +9,6 @@ import PopupMessage from "./PopupMessage";
 import "./Gameplay.css";
 
 // TODO:
-// Alert user immediately of their correctness
 // Press [P] to see results
 // .. press [P] to resume game
 
@@ -52,7 +51,6 @@ class Gameplay extends Component {
           if (e.key === "p") {
             // resume game
             this.setState({ pauseGame: !this.state.pauseGame });
-            // this.hud.current.updateHUD();
           }
         }
       } else {
@@ -172,14 +170,3 @@ class Gameplay extends Component {
 }
 
 export default Gameplay;
-
-// const congratulateMessages = ["Marvelouso!!", "Spectacular!!", "Impressive!!!", "DJ in the making!!!", "Wonderful!", "That was right!"];
-// const encouragementMessages = ["Nice Guess...", "Keep Trying...", "Good Guess...", "You were close...", "It's okay."];
-
-// function congratulateMessage() {
-//   return congratulateMessages[Math.floor(Math.random() * congratulateMessages.length)];
-// }
-
-// function encouragementMessage() {
-//   return encouragementMessages[Math.floor(Math.random() * encouragementMessages.length)];
-// }

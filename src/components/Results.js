@@ -11,9 +11,14 @@ class Results extends Component {
     const heading = ["Song Album", "Artist", "Actual Ranking", "Your Ranking"];
 
     return (
-      <div className="results">
-        <h1>Your Result</h1>
-        <Table heading={heading} body={processSongHistory(songHistory)} />
+      <div>
+        <div className="resultsInstruction">
+          <p>Press [P] to resume game</p>
+        </div>
+        <div className="results">
+          <h1>Your Result</h1>
+          <Table heading={heading} body={processSongHistory(songHistory)} />
+        </div>
       </div>
     );
   }
