@@ -1,53 +1,48 @@
-Running the program
-1. Go to the main file directory and enter "node server.js" to run the backend server
-2. Enter "npm start" to run the game and play it on the browser 
+# Change++ Coding Challenge 2021 - Tetris DJ Challenge
 
-Reading the program
-1. server.js
-> Responsible for the backend of the game
-> Uses axios and cheerio to scrape www.billboard.com/charts/hot-100
-> RESTful API to transfer a random song (title, artist, position)
+## Description
+![Home screen](https://i.imgur.com/17KQ4aj.png)
 
-2. index.js, App.js, Main.js
-> The top-most parent React components of the game
+### The Challenge
+Your task is to build a game which tests the user on their ability to rank the popularity of songs.
 
-3. Gameplay.js
-> Responsible for the main functionality of the game
-> Parent component of Menu, HudDisplay, Songs, Boxes, Results, and PopupMessage
-> Handles user keyboard inputs and make API requests to retrieve and store songs
-> Monitors the state of its children components 
+[Click here to read the complete challenge specifications](https://github.com/zineanteoh/changeplusplus-challenge2021/blob/main/README2.md)
 
-4. Menu.js
-> Provides instructions to the user on how to play the game
+## How To Play
+1. Clone the repository to your local computer. 
+2. Using terminal, enter "node server.js" to run the backend server
+3. Then enter "npm start" to run the game and play it on the browser 
 
-5. HudDisplay.js
-> Responsible for the Heads Up Displays (Current Song & Next Song)
+## How It Works
 
-6. Songs.js
-> Responsible for the song block component (controllable by user)
+### server.js 
+- Responsible for the backend of the game
+- Uses axios and cheerio to scrape www.billboard.com/charts/hot-100
+- RESTful API to transfer a random song (title, artist, position)
 
-7. Boxes.js
-> Responsible for the row of boxes below 
+### index.js, App.js, Main.js
+- The top-most parent React components of the game
 
-8. Results.js
-> Responsible for displaying the results to users when [P] is pressed
+### Gameplay.js
+- Responsible for the main functionality of the game
+- Parent component of Menu, HudDisplay, Songs, Boxes, Results, and PopupMessage
+- Handles user keyboard inputs and make API requests to retrieve and store songs
+- Monitors the state of its children components 
 
-9. PopupMessage.js
-> Responsible for alerting user of their correctness
+### Menu.js
+- Provides instructions to the user on how to play the game
 
-Reflection on the Challenge
-> This challenge taught me a lot. This was my first time learning React, writing RESTfulAPI, learning 
-Node.js, and performing web scraping. I was glad that I managed to take things one step at a time 
-(I tried not to overwhelm myself by the amount of 'new knowledge' I don't know). 
-At times I felt clueless (i.e. How do I scrape and process the songs into an array?), but I still 
-managed to learn how to do most of the things by googling, thinking, and the occasional trial-and-errors. 
+### HudDisplay.js
+- Responsible for the Heads Up Displays (Current Song & Next Song)
 
-Challenges I faced
-> Knowing my limitations - I originally had more ambitious ideas for this challenge, but decided to
-scratch that because I knew I was not experienced enough for it. I settled for a tetris-like game mechanics
-instead. 
-> Designs - I don't consider myself the best designer, and I definitely think there are many design-related 
-things that could be improved (font-readability, font styles, color choices, borders, paddings, so many...)
-> General programming structure - As much as I can I try to make my code readable for others. However, 
-I often think that certain parts of my code can certainly be improved, whether that is readability or 
-efficiency. It is still something that I have to work on (any feedback is appreciated)
+### Songs.js
+- Responsible for the song block component (controllable by user)
+
+### Boxes.js
+- Responsible for the row of boxes below 
+
+### Results.js
+- Responsible for displaying the results to users when [P] is pressed
+
+### PopupMessage.js
+- Responsible for alerting user of their correctness
