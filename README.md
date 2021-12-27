@@ -2,6 +2,7 @@
 
 ## Description
 ![Home screen](https://i.imgur.com/17KQ4aj.png)
+![Gameplay demo](zi_coding_challenge.gif)
 
 ### The Challenge
 Your task is to build a game which tests the user on their ability to rank the popularity of songs.
